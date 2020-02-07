@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
@@ -75,7 +75,8 @@ namespace Nop.Services.Catalog
             var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.Now.AddHours(cookieExpires),
-                HttpOnly = true
+                HttpOnly = true,
+                Secure = _httpContextAccessor.HttpContext.Request.IsHttps
             };
 
             //add cookie

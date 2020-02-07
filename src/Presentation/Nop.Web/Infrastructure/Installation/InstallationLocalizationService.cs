@@ -116,7 +116,8 @@ namespace Nop.Web.Infrastructure.Installation
             var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.Now.AddHours(24),
-                HttpOnly = true
+                HttpOnly = true,
+                Secure = _httpContextAccessor.HttpContext.Request.IsHttps
             };
             var cookieName = $"{NopCookieDefaults.Prefix}{NopCookieDefaults.InstallationLanguageCookie}";
             httpContext.Response.Cookies.Delete(cookieName);
