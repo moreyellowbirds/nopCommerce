@@ -23,6 +23,7 @@ using Nop.Web.Models.Common;
 
 namespace Nop.Web.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public partial class CommonController : BasePublicController
     {
         #region Fields
@@ -195,8 +196,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpPost, ActionName("ContactUs")]
-        [PublicAntiForgery]
+        [HttpPost, ActionName("ContactUs")]        
         [ValidateCaptcha]
         //available even when a store is closed
         [CheckAccessClosedStore(true)]
@@ -247,8 +247,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpPost, ActionName("ContactVendor")]
-        [PublicAntiForgery]
+        [HttpPost, ActionName("ContactVendor")]        
         [ValidateCaptcha]
         public virtual IActionResult ContactVendorSend(ContactVendorModel model, bool captchaValid)
         {
@@ -323,6 +322,7 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
+        [IgnoreAntiforgeryToken]
         //available even when a store is closed
         [CheckAccessClosedStore(true)]
         //available even when navigation is not allowed

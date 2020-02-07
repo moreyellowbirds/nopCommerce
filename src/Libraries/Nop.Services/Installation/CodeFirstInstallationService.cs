@@ -43,7 +43,6 @@ using Nop.Services.Helpers;
 using Nop.Services.Localization;
 using Nop.Services.Media;
 using Nop.Services.News;
-using Nop.Services.Seo;
 using NopSeoDefaults = Nop.Services.Defaults.NopSeoDefaults;
 
 namespace Nop.Services.Installation
@@ -6575,8 +6574,6 @@ namespace Nop.Services.Installation
                 ForceSslForAllPages = true,
                 EncryptionKey = CommonHelper.GenerateRandomDigitCode(16),
                 AdminAreaAllowedIpAddresses = null,
-                EnableXsrfProtectionForAdminArea = true,
-                EnableXsrfProtectionForPublicStore = true,
                 HoneypotEnabled = false,
                 HoneypotInputName = "hpinput",
                 AllowNonAsciiCharactersInHeaders = true

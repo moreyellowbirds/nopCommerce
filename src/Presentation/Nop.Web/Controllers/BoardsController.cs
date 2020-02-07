@@ -20,6 +20,7 @@ using Nop.Web.Models.Boards;
 namespace Nop.Web.Controllers
 {
     [HttpsRequirement(SslRequirement.No)]
+    [AutoValidateAntiforgeryToken]
     public partial class BoardsController : BasePublicController
     {
         #region Fields
@@ -195,6 +196,7 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
+        [IgnoreAntiforgeryToken]
         public virtual IActionResult ForumWatch(int id)
         {
             var watchTopic = _localizationService.GetResource("Forum.WatchForum");
@@ -256,6 +258,7 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
+        [IgnoreAntiforgeryToken]
         public virtual IActionResult TopicWatch(int id)
         {
             var watchTopic = _localizationService.GetResource("Forum.WatchTopic");
@@ -308,8 +311,7 @@ namespace Nop.Web.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [PublicAntiForgery]
+        [HttpPost]        
         public virtual IActionResult TopicMove(TopicMoveModel model)
         {
             if (!_forumSettings.ForumsEnabled)
@@ -330,7 +332,6 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        [PublicAntiForgery]
         public virtual IActionResult TopicDelete(int id)
         {
             if (!_forumSettings.ForumsEnabled)
@@ -380,7 +381,6 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        [PublicAntiForgery]
         [ValidateCaptcha]
         public virtual IActionResult TopicCreate(EditForumTopicModel model, bool captchaValid)
         {
@@ -505,7 +505,6 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        [PublicAntiForgery]
         [ValidateCaptcha]
         public virtual IActionResult TopicEdit(EditForumTopicModel model, bool captchaValid)
         {
@@ -627,7 +626,6 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        [PublicAntiForgery]
         public virtual IActionResult PostDelete(int id)
         {
             if (!_forumSettings.ForumsEnabled)
@@ -688,7 +686,6 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        [PublicAntiForgery]
         [ValidateCaptcha]
         public virtual IActionResult PostCreate(EditForumPostModel model, bool captchaValid)
         {
@@ -800,7 +797,6 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost]
-        [PublicAntiForgery]
         [ValidateCaptcha]
         public virtual IActionResult PostEdit(EditForumPostModel model, bool captchaValid)
         {
@@ -918,6 +914,7 @@ namespace Nop.Web.Controllers
         }
 
         [HttpPost, ActionName("CustomerForumSubscriptions")]
+        [IgnoreAntiforgeryToken]
         public virtual IActionResult CustomerForumSubscriptionsPOST(IFormCollection formCollection)
         {
             foreach (var key in formCollection.Keys)

@@ -6,7 +6,6 @@ using Nop.Core.Domain.Media;
 using Nop.Core.Infrastructure;
 using Nop.Services.Logging;
 using Nop.Services.Media;
-using Nop.Web.Framework.Mvc.Filters;
 
 namespace Nop.Web.Areas.Admin.Controllers
 {
@@ -63,7 +62,7 @@ namespace Nop.Web.Areas.Admin.Controllers
 
         [HttpPost]
         //do not validate request token (XSRF)
-        [AdminAntiForgery(true)]
+        [IgnoreAntiforgeryToken]
         public virtual IActionResult SaveDownloadUrl(string downloadUrl)
         {
             //don't allow to save empty download object
@@ -91,7 +90,7 @@ namespace Nop.Web.Areas.Admin.Controllers
 
         [HttpPost]
         //do not validate request token (XSRF)
-        [AdminAntiForgery(true)]
+        [IgnoreAntiforgeryToken]
         public virtual IActionResult AsyncUpload()
         {
             var httpPostedFile = Request.Form.Files.FirstOrDefault();
