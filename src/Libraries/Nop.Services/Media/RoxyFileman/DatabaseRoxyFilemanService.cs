@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -500,11 +501,13 @@ namespace Nop.Services.Media.RoxyFileman
             await base.DeleteFileAsync(sourcePath);
         }
 
+
         /// <summary>
         /// Upload files to a directory on passed path
         /// </summary>
         /// <param name="directoryPath">Path to directory to upload files</param>
         /// <returns>A task that represents the completion of the operation</returns>
+        [SuppressMessage("Security", "SCS0018:Path traversal: injection possible in {1} argument passed to '{0}'", Justification = "<Pending>")]
         public override async Task UploadFilesAsync(string directoryPath)
         {
             var result = GetSuccessResponse();

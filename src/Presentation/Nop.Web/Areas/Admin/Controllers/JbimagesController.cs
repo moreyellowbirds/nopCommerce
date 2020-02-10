@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core.Infrastructure;
 using Nop.Services.Security;
-using Nop.Web.Framework.Mvc.Filters;
 
 namespace Nop.Web.Areas.Admin.Controllers
 {
@@ -44,6 +44,7 @@ namespace Nop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [SuppressMessage("Security", "SCS0018:Path traversal: injection possible in {1} argument passed to '{0}'", Justification = "<Pending>")]
         public virtual IActionResult Upload()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.HtmlEditorManagePictures))
