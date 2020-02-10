@@ -128,10 +128,6 @@ namespace Nop.Web.Controllers
             if (string.IsNullOrEmpty(returnUrl))
                 returnUrl = Url.RouteUrl("Homepage");
 
-            //prevent open redirection attack
-            if (!Url.IsLocalUrl(returnUrl))
-                returnUrl = Url.RouteUrl("Homepage");
-
             //language part in URL
             if (_localizationSettings.SeoFriendlyUrlsForLanguagesEnabled)
             {
@@ -144,6 +140,10 @@ namespace Nop.Web.Controllers
             }
 
             _workContext.WorkingLanguage = language;
+
+            //prevent open redirection attack
+            if (!Url.IsLocalUrl(returnUrl))
+                returnUrl = Url.RouteUrl("Homepage");
 
             return Redirect(returnUrl);
         }

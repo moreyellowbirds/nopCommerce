@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core;
-using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Forums;
 using Nop.Core.Domain.Security;
 using Nop.Core.Rss;
@@ -760,13 +759,13 @@ namespace Nop.Web.Controllers
 
                     var pageSize = _forumSettings.PostsPageSize > 0 ? _forumSettings.PostsPageSize : 10;
 
-                    var pageIndex = (_forumService.CalculateTopicPageIndex(forumPost.TopicId, pageSize, forumPost.Id) + 1);
+                    var pageIndex = _forumService.CalculateTopicPageIndex(forumPost.TopicId, pageSize, forumPost.Id) + 1;
                     var url = string.Empty;
                     if (pageIndex > 1)
                         url = Url.RouteUrl("TopicSlugPaged", new { id = forumPost.TopicId, slug = _forumService.GetTopicSeName(forumTopic), pageNumber = pageIndex });
                     else
                         url = Url.RouteUrl("TopicSlug", new { id = forumPost.TopicId, slug = _forumService.GetTopicSeName(forumTopic) });
-                    return Redirect($"{url}#{forumPost.Id}");
+                    return LocalRedirect($"{url}#{forumPost.Id}");
                 }
                 catch (Exception ex)
                 {
@@ -880,7 +879,7 @@ namespace Nop.Web.Controllers
                     {
                         url = Url.RouteUrl("TopicSlug", new { id = forumPost.TopicId, slug = _forumService.GetTopicSeName(forumTopic) });
                     }
-                    return Redirect($"{url}#{forumPost.Id}");
+                    return LocalRedirect($"{url}#{forumPost.Id}");
                 }
                 catch (Exception ex)
                 {

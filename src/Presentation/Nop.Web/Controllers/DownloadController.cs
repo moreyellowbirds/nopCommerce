@@ -47,8 +47,10 @@ namespace Nop.Web.Controllers
                 return Content("Sample download is not available any more.");
 
             if (download.UseDownloadUrl)
+#pragma warning disable SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
                 return new RedirectResult(download.DownloadUrl);
-            
+#pragma warning restore SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
+
             if (download.DownloadBinary == null)
                 return Content("Download data is not available any more.");
             
@@ -97,7 +99,9 @@ namespace Nop.Web.Controllers
                 _orderService.UpdateOrderItem(orderItem);
 
                 //return result
+#pragma warning disable SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
                 return new RedirectResult(download.DownloadUrl);
+#pragma warning restore SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
             }
             
             //binary download
@@ -131,14 +135,16 @@ namespace Nop.Web.Controllers
                     return Challenge();
             }
 
-            var download = _downloadService.GetDownloadById(orderItem.LicenseDownloadId.HasValue ? orderItem.LicenseDownloadId.Value : 0);
+            var download = _downloadService.GetDownloadById(orderItem.LicenseDownloadId ?? 0);
             if (download == null)
                 return Content("Download is not available any more.");
             
             if (download.UseDownloadUrl)
+#pragma warning disable SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
                 return new RedirectResult(download.DownloadUrl);
+#pragma warning restore SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
 
-            //binary download
+                //binary download
             if (download.DownloadBinary == null)
                 return Content("Download data is not available any more.");
 
@@ -155,9 +161,11 @@ namespace Nop.Web.Controllers
                 return Content("Download is not available any more.");
 
             if (download.UseDownloadUrl)
+#pragma warning disable SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
                 return new RedirectResult(download.DownloadUrl);
+#pragma warning restore SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
 
-            //binary download
+                //binary download
             if (download.DownloadBinary == null)
                 return Content("Download data is not available any more.");
 
@@ -183,9 +191,11 @@ namespace Nop.Web.Controllers
                 return Content("Download is not available any more.");
 
             if (download.UseDownloadUrl)
+#pragma warning disable SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
                 return new RedirectResult(download.DownloadUrl);
+#pragma warning restore SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
 
-            //binary download
+                //binary download
             if (download.DownloadBinary == null)
                 return Content("Download data is not available any more.");
 

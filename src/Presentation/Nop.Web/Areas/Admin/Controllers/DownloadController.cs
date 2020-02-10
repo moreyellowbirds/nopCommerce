@@ -44,9 +44,11 @@ namespace Nop.Web.Areas.Admin.Controllers
                 return Content("No download record found with the specified id");
 
             if (download.UseDownloadUrl)
+#pragma warning disable SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
                 return new RedirectResult(download.DownloadUrl);
+#pragma warning restore SCS0027 // Open redirect: possibly unvalidated input in {1} argument passed to '{0}'
 
-            //use stored data
+                //use stored data
             if (download.DownloadBinary == null)
                 return Content($"Download data is not available any more. Download GD={download.Id}");
 
